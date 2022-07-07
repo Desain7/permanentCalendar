@@ -14,6 +14,10 @@ import Memo from '../pages/Memo/myMemo.vue'
     history: createWebHashHistory(),
     routes: [
         {
+            path: '/',
+            redirect:'/Today'
+        },
+        {
             name: 'Today',
             path: '/Today',
             component:Today,

@@ -6,8 +6,18 @@ export const reqCategoryList = () => request({
 })
 
 
-export const reqGetSearchInfo = (params) => request({
-    url:'/list',
+export const reqGetDailyInform = (params) => request({
+    url:'/day',
+    method:'post',
+    data:params,
+})
+export const reqGetRecentlyInform = (params) => request({
+    url:'/month',
+    method:'post',
+    data:params,
+})
+export const reqGetYearInform = (params) => request({
+    url:'/year',
     method:'post',
     data:params,
 })

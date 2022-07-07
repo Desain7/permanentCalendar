@@ -9,6 +9,9 @@ const request = axios.create({
 
 request.interceptors.request.use((config) => {
     nprogress.start()
+    if (sessionStorage.getItem('key')){
+        config.body.key = sessionStorage.getItem('token')
+    }
     return config
 })
 
