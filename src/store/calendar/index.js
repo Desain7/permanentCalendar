@@ -11,13 +11,13 @@ let state = {
 let mutations = {
   DAILYINFORM(state, dailyInform) {
     state.dailyInform = dailyInform
-    localStorage.setItem(`todayInform`, JSON.stringify(dailyInform)); // 缓存数据
-    localStorage.setItem(`todayTimestamp`, Date.now()); // 记录时间
+    localStorage.setItem(`dailyInform`, JSON.stringify(dailyInform)); // 缓存数据
+    localStorage.setItem(`dailyTimestamp`, Date.now()); // 记录时间
   },
   RECENTLYINFORM(state, recentlyInform) {
     state.recentlyInform = recentlyInform
-    localStorage.setItem(`recentInform`, JSON.stringify(recentlyInform)); 
-    localStorage.setItem(`recentTimestamp`, Date.now()); 
+    localStorage.setItem(`recentlyInform`, JSON.stringify(recentlyInform)); 
+    localStorage.setItem(`recentlyTimestamp`, Date.now()); 
   },
   YEARINFORM(state, yearInform) {
     state.yearInform = yearInform
@@ -36,7 +36,7 @@ let actions = {
   async getRecentlyInform({ commit }, searchInform) {
     let result = await reqGetRecentlyInform(searchInform)
     if (result.error_code == 0) {
-      commit("RECENTLYINFROM", result.data)
+      commit("RECENTLYINFORM", result.result.data)
     }
   },
   async getYearInform({ commit }, searchInform) {
