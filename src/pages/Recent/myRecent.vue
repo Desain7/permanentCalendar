@@ -28,12 +28,12 @@ let searchInform = reactive({
 if (searchInform['year-month'] == '') {
     searchInform['year-month'] = year + '-' + month
 }
-const holidayInform = computed(() => store.state.calendar.recentlyInform);
+const holidayInform = computed(() => store.state.calendar.recentlyInform.holiday_array);
 
 
 function getLocalData(key) {
     let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
-    let expires = 1000 * 3600 * 24;
+    let expires = 1000 * 3600;
     let timestamp = Date.now();
     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
         let inform = localStorage.getItem(`${key}Inform`); // 从缓存中拿到数据给程序使用

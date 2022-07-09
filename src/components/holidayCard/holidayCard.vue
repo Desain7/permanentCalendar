@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="cardContainer" v-for="(item, index) in props.holiday.holiday_array" :key="index">
+        <div class="cardContainer" v-for="(item, index) in props.holiday" :key="index">
             <div class="card">
                 <div class="content">
                     <div class="name">
-                        {{ item.name }}
+                        {{ item.name}}
                     </div>
                     <div class="date">
-                        {{ item.festival }}
+                        {{ item.festival || item.startday}}
                     </div>
                 </div>
                 <div class="append">

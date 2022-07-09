@@ -42,7 +42,7 @@ let actions = {
   async getYearInform({ commit }, searchInform) {
     let result = await reqGetYearInform(searchInform)
     if (result.error_code == 0) {
-      commit("YEARINFROM", result.data)
+      commit("YEARINFORM", result.result.data)
     }
   },
 }

@@ -122,7 +122,7 @@ if (searchInform.date == '') {
 
 function getLocalData(key) {
     let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
-    let expires = 1000 * 3600 * 24; // 有效时间
+    let expires = 1000 * 3600; // 有效时间
     let timestamp = Date.now();  // 当前时间
     // 从缓存中取数据（10min内数据）
     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {

@@ -27,11 +27,11 @@ if (searchInform['year'] == '') {
     searchInform['year'] = year
 }
 
-const holidayInform = computed(() => store.state.calendar.yearInform);
+const holidayInform = computed(() => store.state.calendar.yearInform.holiday_list);
 
 function getLocalData(key) {
     let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
-    let expires = 1000 * 3600 * 24;
+    let expires = 1000 * 3600;
     let timestamp = Date.now();
     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
         let inform = localStorage.getItem(`${key}Inform`);
