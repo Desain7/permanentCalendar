@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import {reactive, onMounted} from 'vue'
+import { reactive, onMounted } from 'vue'
 import { useStore } from 'vuex';
 import mySearch from '../../components/informSearch.vue'
 const store = useStore()
@@ -57,17 +57,35 @@ let day = date.getDate(); //获取当前日(1-31)
 date.getDay(); //获取当前星期X(0-6,0代表星期天)
 
 let searchInform = reactive({
-    date:'',
-    key:'fe0070fd7472a07b5927cefd98d281eb'
+    date: '',
+    key: 'fe0070fd7472a07b5927cefd98d281eb'
 })
-if(searchInform.date == '') {
+if (searchInform.date == '') {
     searchInform.date = year + '-' + month + '-' + day
 }
-    
 
-onMounted(()=>{
-    store.dispatch('getDailyInform', searchInform)
-}) 
+function getLocalData(key) {
+    let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
+    let expires = 1000 * 3600 * 24; // 有效时间
+    let timestamp = Date.now();  // 当前时间
+    // 从缓存中取数据（10min内数据）
+    if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
+        let inform = localStorage.getItem(`${key}Inform`); // 从缓存中拿到数据给程序使用
+        store.state.calendar.dailyInform = JSON.parse(inform);
+        return true;
+    }
+    return false;
+}
+
+
+onMounted(() => {
+    if(getLocalData('today')) {
+        console.log(123)
+    } else {
+        store.dispatch('getDailyInform', searchInform)
+    }
+    
+})
 
 </script>
 
@@ -132,16 +150,19 @@ $textColor: aliceblue;
         border-radius: 1rem;
         background-color: antiquewhite;
         display: flex;
+
         .cardText {
             width: 100%;
             margin: auto 0;
             display: flex;
             flex-direction: row;
+
             .title {
                 margin: auto 0 auto 5%;
                 font-size: 1.5rem;
                 color: red;
             }
+
             .content {
                 margin: auto 0 auto 10%;
                 font-size: 1rem;
