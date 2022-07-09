@@ -4,15 +4,15 @@
         <div class="todayCard">
             <div class="cardHead">
                 <div class="headText">
-                    星期一
+                    {{ todayInform.weekday }}
                 </div>
             </div>
             <div class="mainCard">
                 <div class="date">
-                    九月十七
+                    {{ todayInform.lunar }}
                 </div>
                 <div class="today">
-                    2020年11月2日
+                    {{ today }}
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     当前年月
                 </div>
                 <div class="content">
-                    2020年11月
+                    {{yearMonth}}
                 </div>
             </div>
         </div>
@@ -36,7 +36,46 @@
                     今年属相
                 </div>
                 <div class="content">
-                    鼠
+                    {{todayInform.animalsYear}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="informCardContainer">
+        <div class="informCard">
+            <div class="cardText">
+                <div class="title">
+                    农历年份
+                </div>
+                <div class="content">
+                    {{todayInform.lunarYear}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="informCardContainer">
+        <div class="informCard">
+            <div class="cardText">
+                <div class="title">
+                    适宜事件
+                </div>
+                <div class="content">
+                    {{todayInform.suit}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="informCardContainer">
+        <div class="informCard">
+            <div class="cardText">
+                <div class="title">
+                    避免事件
+                </div>
+                <div class="content">
+                    {{todayInform.avoid}}
                 </div>
             </div>
 
@@ -46,15 +85,32 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, computed, nextTick } from 'vue'
 import { useStore } from 'vuex';
 import mySearch from '../../components/informSearch.vue'
 const store = useStore()
 let date = new Date();
-let year = date.getFullYear();//当前年(4位)
-let month = date.getMonth() + 1;//当前月
-let day = date.getDate(); //获取当前日(1-31)
-date.getDay(); //获取当前星期X(0-6,0代表星期天)
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+
+onMounted(() => {
+    if (getLocalData('today')) {
+        console.log(123)
+    } else {
+        store.dispatch('getDailyInform', searchInform)
+    }
+
+})
+let today = ref('')
+let yearMonth = ref('')
+nextTick(() => {
+    let tem = todayInform.value.date.split('-')
+    today.value = `${tem[0]}年${tem[1]}月${tem[2]}日`
+    yearMonth.value = `${tem[0]}年${tem[1]}月`
+})
+const todayInform = computed(() => store.state.calendar.dailyInform);
+
 
 let searchInform = reactive({
     date: '',
@@ -76,16 +132,6 @@ function getLocalData(key) {
     }
     return false;
 }
-
-
-onMounted(() => {
-    if(getLocalData('today')) {
-        console.log(123)
-    } else {
-        store.dispatch('getDailyInform', searchInform)
-    }
-    
-})
 
 </script>
 
