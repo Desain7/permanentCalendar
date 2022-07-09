@@ -46,9 +46,28 @@
 </template>
 
 <script setup>
-// import {ref} from 'vue'
+import {reactive, onMounted} from 'vue'
+import { useStore } from 'vuex';
 import mySearch from '../../components/informSearch.vue'
+const store = useStore()
+let date = new Date();
+let year = date.getFullYear();//当前年(4位)
+let month = date.getMonth() + 1;//当前月
+let day = date.getDate(); //获取当前日(1-31)
+date.getDay(); //获取当前星期X(0-6,0代表星期天)
 
+let searchInform = reactive({
+    date:'',
+    key:'fe0070fd7472a07b5927cefd98d281eb'
+})
+if(searchInform.date == '') {
+    searchInform.date = year + '-' + month + '-' + day
+}
+    
+
+onMounted(()=>{
+    store.dispatch('getDailyInform', searchInform)
+}) 
 
 </script>
 

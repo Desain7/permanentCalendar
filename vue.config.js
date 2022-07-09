@@ -1,25 +1,22 @@
 const { VantResolver } = require('unplugin-vue-components/resolvers');
 const ComponentsPlugin = require('unplugin-vue-components/webpack');
-
-
 const { defineConfig } = require('@vue/cli-service')
+
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
+    // host:'localhost',
+    // port:'8080',
     proxy: {
       '/api': {
-        target: 'http://v.juhe.cn/calendar/', //对应自己的接口
+        target: 'http://v.juhe.cn/calendar/',
         changeOrigin: true,
-        ws: true,
         pathRewrite: {
           '^/api': ''
         }
       }
     }
   },
-})
-
-module.exports = {
   configureWebpack: {
     plugins: [
       ComponentsPlugin({
@@ -27,4 +24,4 @@ module.exports = {
       }),
     ],
   },
-};
+})

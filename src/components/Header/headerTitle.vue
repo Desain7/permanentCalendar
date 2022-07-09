@@ -1,6 +1,6 @@
 <template>
     <van-config-provider :theme-vars="themeVars">
-        <NavBar :title="thisTitle" fixed=true>
+        <NavBar :title="thisTitle" fixed='true'>
             <template #left>
                 <van-icon name="smile-o" size="2rem" color="#fff" @click="goWeather" />
             </template>
