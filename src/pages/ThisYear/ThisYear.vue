@@ -1,5 +1,5 @@
 <template>
-    <mySearch/>
+    <mySearch default="year"/>
     <holidayCard :holiday="holidayInform"></holidayCard>
 </template>
 
@@ -31,7 +31,7 @@ const holidayInform = computed(() => store.state.calendar.yearInform.holiday_lis
 
 function getLocalData(key) {
     let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
-    let expires = 1000 * 3600;
+    let expires = 1000 * 3600 * 12;
     let timestamp = Date.now();
     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
         let inform = localStorage.getItem(`${key}Inform`);

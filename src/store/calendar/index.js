@@ -23,13 +23,22 @@ let mutations = {
     state.yearInform = yearInform
     localStorage.setItem(`yearInform`, JSON.stringify(yearInform)); 
     localStorage.setItem(`yearTimestamp`, Date.now()); 
+  },
+  SEARCHINFORM(state, searchInform) {
+    if(searchInform.date) {
+      state.dailyInform = searchInform
+    } else if(searchInform['year-month']) {
+      state.recentlyInform = searchInform
+    } else if(searchInform.year) {
+      state.yearInform = searchInform
+    }
+
   }
 }
 let actions = {
   async getDailyInform({ commit }, searchInform) {
     let result = await reqGetDailyInform(searchInform)
     if (result.error_code == 0) {
-      console.log(111)
       commit("DAILYINFORM", result.result.data)
     }
   },
@@ -43,6 +52,20 @@ let actions = {
     let result = await reqGetYearInform(searchInform)
     if (result.error_code == 0) {
       commit("YEARINFORM", result.result.data)
+    }
+  },
+  async getSearchInform({ commit }, searchInform) {
+    let result = {}
+    if(searchInform.date) {
+      result = await reqGetDailyInform(searchInform)
+    } else if(searchInform['year-month']) {
+      result = await reqGetRecentlyInform(searchInform)
+    } else if(searchInform.year) {
+      result = await reqGetYearInform(searchInform)
+    }
+    
+    if (result.error_code == 0) {
+      commit("SEARCHINFORM", result.result.data)
     }
   },
 }

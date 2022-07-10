@@ -10,10 +10,10 @@ const request = axios.create({
 request.interceptors.request.use((config) => {
     nprogress.start()
     if(config.params.key) {
-        sessionStorage.setItem('key', config.params.key)
+        localStorage.setItem('key', config.params.key)
     }
-    if (sessionStorage.getItem('key')){
-        config.params.key = sessionStorage.getItem('key')
+    if (localStorage.getItem('key')){
+        config.params.key = localStorage.getItem('key')
     }
     return config
 })

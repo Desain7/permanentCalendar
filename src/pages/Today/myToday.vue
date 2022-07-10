@@ -1,5 +1,5 @@
 <template>
-    <mySearch />
+    <mySearch default="daily" />
     <div class="todayCardContainer">
         <div class="todayCard">
             <div class="cardHead">
@@ -12,7 +12,7 @@
                     {{ todayInform.lunar }}
                 </div>
                 <div class="today">
-                    {{ today }}
+                    {{inform.today }}
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     当前年月
                 </div>
                 <div class="content">
-                    {{yearMonth}}
+                    {{ inform.yearMonth }}
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     今年属相
                 </div>
                 <div class="content">
-                    {{todayInform.animalsYear}}
+                    {{ todayInform.animalsYear }}
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                     农历年份
                 </div>
                 <div class="content">
-                    {{todayInform.lunarYear}}
+                    {{ todayInform.lunarYear }}
                 </div>
             </div>
 
@@ -62,7 +62,7 @@
                     适宜事件
                 </div>
                 <div class="content">
-                    {{todayInform.suit}}
+                    {{ todayInform.suit }}
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                     避免事件
                 </div>
                 <div class="content">
-                    {{todayInform.avoid}}
+                    {{ todayInform.avoid }}
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed, nextTick } from 'vue'
+import { reactive, onMounted, computed, nextTick, onBeforeUpdate} from 'vue'
 import { useStore } from 'vuex';
 import mySearch from '@/components/informSearch.vue'
 const store = useStore()
@@ -102,15 +102,20 @@ onMounted(() => {
     }
 
 })
-let today = ref('')
-let yearMonth = ref('')
+let inform = reactive({})
+
+const todayInform = computed(() => store.state.calendar.dailyInform);
 nextTick(() => {
     let tem = todayInform.value.date.split('-')
-    today.value = `${tem[0]}年${tem[1]}月${tem[2]}日`
-    yearMonth.value = `${tem[0]}年${tem[1]}月`
+    inform.today = computed(() => `${tem[0]}年${tem[1]}月${tem[2]}日`)
+    inform.yearMonth = computed(() => `${tem[0]}年${tem[1]}月`);
 })
-const todayInform = computed(() => store.state.calendar.dailyInform);
 
+onBeforeUpdate(()=>{
+    let tem = todayInform.value.date.split('-')
+    inform.today = computed(() => `${tem[0]}年${tem[1]}月${tem[2]}日`)
+    inform.yearMonth = computed(() => `${tem[0]}年${tem[1]}月`);
+}) 
 
 let searchInform = reactive({
     date: '',
@@ -122,12 +127,11 @@ if (searchInform.date == '') {
 
 function getLocalData(key) {
     let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
-    let expires = 1000 * 3600; // 有效时间
+    let expires = 1000 * 3600 * 12; // 有效时间
     let timestamp = Date.now();  // 当前时间
-    // 从缓存中取数据（10min内数据）
     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
         let inform = localStorage.getItem(`${key}Inform`); // 从缓存中拿到数据给程序使用
-        store.state.calendar[`${key}Inform`]  = JSON.parse(inform);
+        store.state.calendar[`${key}Inform`] = JSON.parse(inform);
         return true;
     }
     return false;
@@ -205,12 +209,13 @@ $textColor: aliceblue;
 
             .title {
                 margin: auto 0 auto 5%;
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 color: red;
             }
 
             .content {
                 margin: auto 0 auto 10%;
+                width: 13rem;
                 font-size: 1rem;
             }
         }

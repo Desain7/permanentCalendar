@@ -10,7 +10,7 @@
                         {{ item.festival || item.startday}}
                     </div>
                 </div>
-                <div class="append">
+                <div class="append" v-if="item.desc">
                     <div class="appendText">
                         假期描述:{{ item.desc }}
                     </div>
