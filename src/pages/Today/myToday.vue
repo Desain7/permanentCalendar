@@ -87,7 +87,7 @@
 <script setup>
 import { ref, reactive, onMounted, computed, nextTick } from 'vue'
 import { useStore } from 'vuex';
-import mySearch from '../../components/informSearch.vue'
+import mySearch from '@/components/informSearch.vue'
 const store = useStore()
 let date = new Date();
 let year = date.getFullYear();
@@ -95,7 +95,7 @@ let month = date.getMonth() + 1;
 let day = date.getDate();
 
 onMounted(() => {
-    if (getLocalData('today')) {
+    if (getLocalData('daily')) {
         console.log(123)
     } else {
         store.dispatch('getDailyInform', searchInform)
@@ -122,12 +122,12 @@ if (searchInform.date == '') {
 
 function getLocalData(key) {
     let storageTimestamp = localStorage.getItem(`${key}Timestamp`);
-    let expires = 1000 * 3600 * 24; // 有效时间
+    let expires = 1000 * 3600; // 有效时间
     let timestamp = Date.now();  // 当前时间
     // 从缓存中取数据（10min内数据）
     if (storageTimestamp && (timestamp - storageTimestamp) < expires) {
         let inform = localStorage.getItem(`${key}Inform`); // 从缓存中拿到数据给程序使用
-        store.state.calendar.dailyInform = JSON.parse(inform);
+        store.state.calendar[`${key}Inform`]  = JSON.parse(inform);
         return true;
     }
     return false;

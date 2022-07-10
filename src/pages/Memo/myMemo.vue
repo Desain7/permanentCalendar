@@ -1,5 +1,5 @@
 <template>
-    <mySearch/>
+    <div></div>
 </template>
 
 <script setup>

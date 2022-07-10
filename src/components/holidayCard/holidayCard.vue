@@ -1,36 +1,19 @@
 <template>
-    <div class="cardContainer">
-        <div class="card">
-            <div class="content">
-                <div class="name">
-                    中秋节
+    <div>
+        <div class="cardContainer" v-for="(item, index) in props.holiday" :key="index">
+            <div class="card">
+                <div class="content">
+                    <div class="name">
+                        {{ item.name}}
+                    </div>
+                    <div class="date">
+                        {{ item.festival || item.startday}}
+                    </div>
                 </div>
-                <div class="date">
-                    2020年10月1日
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="cardContainer">
-        <div class="card">
-            <div class="content">
-                <div class="name">
-                    中秋节
-                </div>
-                <div class="date">
-                    2020年10月1日
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="cardContainer">
-        <div class="card">
-            <div class="content">
-                <div class="name">
-                    中秋节
-                </div>
-                <div class="date">
-                    2020年10月1日
+                <div class="append">
+                    <div class="appendText">
+                        假期描述:{{ item.desc }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,9 +21,10 @@
 </template>
 
 <script setup>
-// import {ref} from 'vue'
-
-
+import { defineProps } from 'vue'
+const props = defineProps({
+    holiday: Object
+})
 </script>
 
 <style lang="scss" scoped>
@@ -57,6 +41,8 @@
         height: 100%;
         border-radius: 2rem;
         display: flex;
+        flex-direction: column;
+        box-shadow:0.5rem 0.5rem 0.8rem#aaa;
         // background-image: url('./imgs/bg2.jpg');
         // background-size: cover;
 
@@ -68,7 +54,18 @@
             }
 
             .date {
+                margin-top: 25%;
                 font-size: 1.5rem;
+            }
+        }
+
+        .append {
+            height: 25%;
+            border-radius:  0 0 2rem 2rem;
+            background-color: aqua;
+            display: flex;
+            .appendText{
+                margin: auto;
             }
         }
     }
