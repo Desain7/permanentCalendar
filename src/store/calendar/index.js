@@ -1,8 +1,6 @@
-// import { createStore } from 'vuex'
 import { reqGetDailyInform, reqGetRecentlyInform, reqGetYearInform } from '@/api'
 
 
-// export default createStore({
 let state = {
   dailyInform: {},
   recentlyInform: {},
@@ -74,4 +72,3 @@ export default {
   mutations,
   actions
 }
-  // })

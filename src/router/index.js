@@ -5,7 +5,6 @@ import {
 import Today from '../pages/Today/myToday.vue'
 import Recent from '../pages/Recent/myRecent.vue'
 import ThisYear from '../pages/ThisYear/ThisYear.vue'
-import Weather from '../pages/Weather/recentlyWeather.vue'
 import Memo from '../pages/Memo/myMemo.vue'
 
 
@@ -31,11 +30,6 @@ import Memo from '../pages/Memo/myMemo.vue'
             name: 'ThisYear',
             path: '/ThisYear',
             component:ThisYear,
-        },
-        {
-            name: 'Weather',
-            path: '/Weather',
-            component:Weather,
         },
         {
             name: 'Memo',

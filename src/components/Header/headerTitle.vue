@@ -1,9 +1,6 @@
 <template>
     <van-config-provider :theme-vars="themeVars">
         <NavBar :title="thisTitle" :fixed="true">
-            <template #left>
-                <van-icon name="smile-o" size="1.5rem" color="#fff" @click="goWeather" />
-            </template>
             <template #right>
                 <van-icon name="add-o" size="1.5rem" color="#fff" @click="goMemo" />
             </template>
@@ -41,10 +38,6 @@ const themeVars = {
     navBarBackgroundColor: 'rgb(238,65,64)',
     navBarTitleTextColor: '#fff'
 };
-
-function goWeather() {
-    router.push('/Weather')
-}
 function goMemo() {
     router.push('/Memo')
 }
