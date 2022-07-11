@@ -30,7 +30,6 @@ watch(() => router.currentRoute.value.fullPath,()=> {
     } else if (router.currentRoute.value.fullPath == '/Memo') {
         thisTitle.value = '备忘录'
     }
-    console.log(router.currentRoute.value.fullPath)
 },{immediate:true})
 
 //配置覆盖css变量

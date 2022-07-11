@@ -97,7 +97,7 @@ function saveMemo() {
 
 function formatTime(value) {
     if (value) {
-        let date = new Date(value)	// 时间戳为秒：10位数
+        let date = new Date(value)
         let year = date.getFullYear()
         let month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
         let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
@@ -115,7 +115,7 @@ onMounted(() => {
 })
 function getMemo() {
     if (localStorage.getItem(`memo`)) {
-        let inform = localStorage.getItem(`memo`); // 从缓存中拿到数据给程序使用
+        let inform = localStorage.getItem(`memo`);
         store.state.memo.memo = JSON.parse(inform);
     }
 
@@ -163,9 +163,9 @@ function getMemo() {
 
             .content {
                 overflow: hidden;
+                white-space: nowrap;
                 text-overflow: ellipsis;
 
-                span {}
             }
 
 

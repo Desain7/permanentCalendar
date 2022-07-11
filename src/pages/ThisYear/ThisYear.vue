@@ -14,7 +14,7 @@ let year = date.getFullYear();
 
 onMounted(() => {
     if (getLocalData('year')) {
-        console.log(123)
+        console.log('get')
     } else {
         store.dispatch('getYearInform', searchInform)
     }

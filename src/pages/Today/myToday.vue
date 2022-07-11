@@ -12,7 +12,7 @@
                     {{ todayInform.lunar }}
                 </div>
                 <div class="today">
-                    {{inform.today }}
+                    {{ inform.today }}
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { reactive, onMounted, computed, nextTick, onBeforeUpdate} from 'vue'
+import { reactive, onMounted, computed, nextTick, onBeforeUpdate } from 'vue'
 import { useStore } from 'vuex';
 import mySearch from '@/components/informSearch.vue'
 const store = useStore()
@@ -96,7 +96,7 @@ let day = date.getDate();
 
 onMounted(() => {
     if (getLocalData('daily')) {
-        console.log(123)
+        console.log('get')
     } else {
         store.dispatch('getDailyInform', searchInform)
     }
@@ -111,11 +111,11 @@ nextTick(() => {
     inform.yearMonth = computed(() => `${tem[0]}年${tem[1]}月`);
 })
 
-onBeforeUpdate(()=>{
+onBeforeUpdate(() => {
     let tem = todayInform.value.date.split('-')
     inform.today = computed(() => `${tem[0]}年${tem[1]}月${tem[2]}日`)
     inform.yearMonth = computed(() => `${tem[0]}年${tem[1]}月`);
-}) 
+})
 
 let searchInform = reactive({
     date: '',
@@ -156,6 +156,7 @@ $textColor: aliceblue;
         background-image: url('./imgs/bg2.jpg');
         background-size: cover;
         border-radius: 1rem;
+        box-shadow: 0.5rem 0.5rem 0.8rem #aaa;
 
         .cardHead {
             width: 100%;
@@ -191,15 +192,16 @@ $textColor: aliceblue;
     margin-top: 5%;
     display: flex;
     width: 100%;
-    height: 4rem;
+    min-height: 4rem;
 
     .informCard {
         width: 90%;
-        height: 100%;
-        margin: auto;
+        min-height: 100%;
+        margin: 0 auto;
         border-radius: 1rem;
-        background-color: antiquewhite;
+        background-color: white;
         display: flex;
+        box-shadow: 0.5rem 0.5rem 0.8rem #aaa;
 
         .cardText {
             width: 100%;

@@ -16,7 +16,7 @@ let month = date.getMonth() + 1;
 
 onMounted(() => {
     if (getLocalData('recently')) {
-        console.log(123)
+        console.log('get')
     } else {
         store.dispatch('getRecentlyInform', searchInform)
     }

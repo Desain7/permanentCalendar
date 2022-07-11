@@ -61,7 +61,6 @@ watch(() => router.currentRoute.value.fullPath, () => {
     } else if (router.currentRoute.value.fullPath == '/ThisYear') {
         holderText.value = '格式:2022'
     }
-    console.log(router.currentRoute.value.fullPath)
 }, { immediate: true })
 </script>
 
