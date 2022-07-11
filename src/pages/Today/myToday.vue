@@ -157,7 +157,7 @@ $textColor: aliceblue;
         background-size: cover;
         border-radius: 1rem;
         box-shadow: 0.5rem 0.5rem 0.8rem #aaa;
-
+        text-shadow: 0.1rem 0.1rem black;
         .cardHead {
             width: 100%;
             height: 2rem;

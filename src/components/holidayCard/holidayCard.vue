@@ -45,10 +45,10 @@ const props = defineProps({
         box-shadow:0.5rem 0.5rem 0.8rem#aaa;
         background-size: cover;
         // background-size: cover;
-
         .content {
             margin: auto;
-            color: rgb(84,174,255);
+            color: rgb(241,243,244);
+            text-shadow: 0.1rem 0.1rem black;
             .name {
                 font-size: 2.5rem;
             }
