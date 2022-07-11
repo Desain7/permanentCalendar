@@ -1,6 +1,6 @@
 <template>
     <van-sticky offset-top="2.8rem">
-        <Search v-model="value" :placeholder="holderText" show-action @search="onSearch" @cancel="onCancel" />
+        <Search v-model="value" :placeholder="holderText" show-action @search="onSearch" @cancel="onCancel" background="rgb(242,243,245)" />
     </van-sticky>
 
 </template>
